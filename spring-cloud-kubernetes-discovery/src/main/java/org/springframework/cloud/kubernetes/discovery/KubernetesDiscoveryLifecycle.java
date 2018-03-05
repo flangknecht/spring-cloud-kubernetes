@@ -17,19 +17,22 @@
 package org.springframework.cloud.kubernetes.discovery;
 
 import io.fabric8.kubernetes.client.KubernetesClient;
-import org.springframework.cloud.client.discovery.AbstractDiscoveryLifecycle;
 import org.springframework.cloud.client.discovery.event.InstanceRegisteredEvent;
+import org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration;
+import org.springframework.cloud.client.serviceregistry.Registration;
+import org.springframework.cloud.client.serviceregistry.ServiceRegistry;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class KubernetesDiscoveryLifecycle extends AbstractDiscoveryLifecycle {
+public class KubernetesDiscoveryLifecycle extends AbstractAutoServiceRegistration<Registration> {
 
     private KubernetesClient client;
     private KubernetesDiscoveryProperties properties;
 
     private AtomicBoolean running = new AtomicBoolean(false);
 
-    public KubernetesDiscoveryLifecycle(KubernetesClient client, KubernetesDiscoveryProperties properties) {
+    public KubernetesDiscoveryLifecycle(KubernetesClient client, KubernetesDiscoveryProperties properties, ServiceRegistry serviceRegistry) {
+        super(serviceRegistry);
         this.client = client;
         this.properties = properties;
     }
@@ -65,6 +68,16 @@ public class KubernetesDiscoveryLifecycle extends AbstractDiscoveryLifecycle {
     @Override
     protected Object getConfiguration() {
         return properties;
+    }
+
+    @Override
+    protected Registration getRegistration() {
+        return null; // nop
+    }
+
+    @Override
+    protected Registration getManagementRegistration() {
+        return null; // nop
     }
 
     @Override

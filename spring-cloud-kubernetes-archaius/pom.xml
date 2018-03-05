@@ -22,7 +22,7 @@
 	<parent>
 		<artifactId>spring-cloud-kubernetes</artifactId>
 		<groupId>org.springframework.cloud</groupId>
-		<version>0.2.1.BUILD-SNAPSHOT</version>
+		<version>0.2.2.BUILD-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -39,7 +39,7 @@
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-archaius</artifactId>
+			<artifactId>spring-cloud-starter-netflix-archaius</artifactId>
 			<optional>true</optional>
 		</dependency>
 
